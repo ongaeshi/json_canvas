@@ -9,7 +9,7 @@ class JsonCanvasTest < Test::Unit::TestCase
     end
   end
 
-  test "something useful" do
-    assert_equal("expected", "actual")
+  test "constructor" do
+    JsonCanvas.new([], [])
   end
 end
