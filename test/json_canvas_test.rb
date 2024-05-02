@@ -44,5 +44,16 @@ class JsonCanvasTest < Test::Unit::TestCase
     assert_equal t.to_hash, {"id"=>"bar", "x"=>0, "y"=>0, "width"=>250, "height"=>60, "color"=>"1", "type"=>"text", "text"=>""}
   end
 
+  test "to_json" do
+    jc = JsonCanvas.create
+    assert_equal jc.to_json, "{\"nodes\":[],\"edges\":[]}"
+
+    jc.add_text(id: "foo")
+    assert_equal jc.to_json, "{\"nodes\":[{\"id\":\"foo\",\"x\":0,\"y\":0,\"width\":250,\"height\":60,\"type\":\"text\",\"text\":\"\"}],\"edges\":[]}"
+    
+    jc.add_text(id: "bar", x: 10, y: 20, width: 100, height: 200, color: "2", text: "BAR")
+    assert_equal jc.to_json, '{"nodes":[{"id":"foo","x":0,"y":0,"width":250,"height":60,"type":"text","text":""},{"id":"bar","x":10,"y":20,"width":100,"height":200,"color":"2","type":"text","text":"BAR"}],"edges":[]}'
+  end
+
   def valid_id?(id) = /\A[a-z0-9]{16}\z/.match?(id)
 end
