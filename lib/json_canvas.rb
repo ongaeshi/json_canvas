@@ -23,6 +23,18 @@ module JsonCanvas
       @height = kwargs[:height] || 60 
       @color = kwargs[:color] # Optional
     end
+
+    def to_hash
+      h = {
+        "id" => id,
+        "x" => x,
+        "y" => y,
+        "width" => width,
+        "height" => height,
+      }
+      h["color"] = color if color
+      h
+    end
   end
 
   class TextNode < GenericNode
@@ -31,6 +43,12 @@ module JsonCanvas
     def initialize(**kwargs)
       super(**kwargs)
       @text = kwargs[:text] || ""
+    end
+
+    def to_hash
+      h = super.to_hash
+      h["text"] = text
+      h
     end
   end
 
