@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "json_canvas/version"
+require "json"
 require "securerandom"
 
 module JsonCanvas
@@ -74,7 +75,14 @@ module JsonCanvas
     # def add_edge(edge)
     # end
 
-    # def to_s
+    def to_json
+      JSON.generate({
+        nodes: nodes.map {|x| x.to_hash},
+        edges: []
+      })
+    end
+
+    # def save
     # end
   end
 end
