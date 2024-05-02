@@ -19,9 +19,9 @@ module JsonCanvas
       @id = kwargs[:id] || SecureRandom.uuid.gsub('-', '')[0...16]
       @x = kwargs[:x] || 0
       @y = kwargs[:y] || 0
-      @width = kwargs[:width] || 10
-      @height = kwargs[:height] || 10 
-      @color = kwargs[:color] || "#f0f0f0" # Default color shoud be gray.
+      @width = kwargs[:width] || 250
+      @height = kwargs[:height] || 60 
+      @color = kwargs[:color] # Optional
     end
   end
 
