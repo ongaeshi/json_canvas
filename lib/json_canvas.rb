@@ -24,7 +24,7 @@ module JsonCanvas
       @color = kwargs[:color] # Optional
     end
 
-    def to_hash
+    def to_hash_common(type)
       h = {
         "id" => id,
         "x" => x,
@@ -33,20 +33,22 @@ module JsonCanvas
         "height" => height,
       }
       h["color"] = color if color
+      h["type"] = type
       h
     end
   end
 
   class TextNode < GenericNode
-    attr_reader :text
+    attr_reader :type, :text
 
     def initialize(**kwargs)
       super(**kwargs)
+      @type = "text"
       @text = kwargs[:text] || ""
     end
 
     def to_hash
-      h = super.to_hash
+      h = to_hash_common(type)
       h["text"] = text
       h
     end

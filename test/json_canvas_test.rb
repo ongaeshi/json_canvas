@@ -39,9 +39,9 @@ class JsonCanvasTest < Test::Unit::TestCase
   test "text_node_to_hash" do
     jc = JsonCanvas.create
     t = jc.add_text(id: "foo", x: 10, y: 20, text: "hi")
-    assert_equal t.to_hash, {"id"=>"foo", "x"=>10, "y"=>20, "width"=>250, "height"=>60, "text"=>"hi"}
+    assert_equal t.to_hash, {"id"=>"foo", "x"=>10, "y"=>20, "width"=>250, "height"=>60, "type"=>"text", "text"=>"hi"}
     t = jc.add_text(id: "bar", color: "1")
-    assert_equal t.to_hash, {"id"=>"bar", "x"=>0, "y"=>0, "width"=>250, "height"=>60, "text"=>"", "color"=>"1"}
+    assert_equal t.to_hash, {"id"=>"bar", "x"=>0, "y"=>0, "width"=>250, "height"=>60, "color"=>"1", "type"=>"text", "text"=>""}
   end
 
   def valid_id?(id) = /\A[a-z0-9]{16}\z/.match?(id)
