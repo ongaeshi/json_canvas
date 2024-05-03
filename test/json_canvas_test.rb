@@ -69,5 +69,17 @@ class JsonCanvasTest < Test::Unit::TestCase
     assert_equal n.subpath, "#baz"
   end
 
+  test "add_link_node" do
+    jc = JsonCanvas.create
+
+    n = jc.add_link()
+    assert_equal n.type, "link"
+    assert_equal n.url, "https://www.ruby-lang.org"
+
+    n = jc.add_link(url: "https://jsoncanvas.org/spec/1.0/")
+    assert_equal n.type, "link"
+    assert_equal n.url, "https://jsoncanvas.org/spec/1.0/"
+  end
+
   def valid_id?(id) = /\A[a-z0-9]{16}\z/.match?(id)
 end

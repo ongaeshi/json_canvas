@@ -73,6 +73,22 @@ module JsonCanvas
     end
   end
 
+  class LinkNode < GenericNode
+    attr_accessor :type, :url
+
+    def initialize(**kwargs)
+      super(**kwargs)
+      @type = "link"
+      @url = kwargs[:url] || "https://www.ruby-lang.org"
+    end
+
+    def to_hash
+      h = to_hash_common(type)
+      h["url"] = url
+      h
+    end
+  end
+
   class Canvas
     attr_reader :nodes, :edges
 
@@ -92,6 +108,12 @@ module JsonCanvas
 
     def add_file(**kwargs)
       node = FileNode.new(**kwargs)
+      nodes.push(node)
+      node
+    end
+
+    def add_link(**kwargs)
+      node = LinkNode.new(**kwargs)
       nodes.push(node)
       node
     end
