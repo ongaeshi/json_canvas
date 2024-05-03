@@ -13,17 +13,9 @@ class JsonCanvasTest < Test::Unit::TestCase
   test "constructor" do
     jc = JsonCanvas.create
     assert_not_nil jc
-    # jc = JsonCanvas::Canvas.new()
-    # jc.add_node(x: 1, y: 2, text: "Hello")
-    # t = jc.add_text(text: "Hello")
-    # p t
-    # jc.add_file()
-    # jc.add_link()
-    # g = jc.add_group()
-    # g.resize(t1, t2, t3) # Important
-    # jc.to_s
-    # jc.save("path/to/file")
   end
+
+  def valid_id?(id) = /\A[a-z0-9]{16}\z/.match?(id)
 
   test "text_node_default" do
     jc = JsonCanvas.create
@@ -80,6 +72,4 @@ class JsonCanvasTest < Test::Unit::TestCase
     assert_equal n.type, "link"
     assert_equal n.url, "https://jsoncanvas.org/spec/1.0/"
   end
-
-  def valid_id?(id) = /\A[a-z0-9]{16}\z/.match?(id)
 end
