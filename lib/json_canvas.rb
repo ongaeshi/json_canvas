@@ -14,7 +14,7 @@ module JsonCanvas
   end
 
   class GenericNode
-    attr_reader :id, :x, :y, :width, :height, :color
+    attr_accessor :id, :x, :y, :width, :height, :color
 
     def initialize(**kwargs)
       @id = kwargs[:id] || SecureRandom.uuid.gsub('-', '')[0...16]
@@ -40,7 +40,7 @@ module JsonCanvas
   end
 
   class TextNode < GenericNode
-    attr_reader :type, :text
+    attr_accessor :type, :text
 
     def initialize(**kwargs)
       super(**kwargs)
@@ -51,6 +51,24 @@ module JsonCanvas
     def to_hash
       h = to_hash_common(type)
       h["text"] = text
+      h
+    end
+  end
+
+  class FileNode < GenericNode
+    attr_accessor :type, :file, :subpath
+
+    def initialize(**kwargs)
+      super(**kwargs)
+      @type = "file"
+      @file = kwargs[:file] || ""
+      @subpath = kwargs[:subpath]
+    end
+
+    def to_hash
+      h = to_hash_common(type)
+      h["file"] = file
+      h["subpath"] = subpath if subpath
       h
     end
   end
@@ -68,6 +86,12 @@ module JsonCanvas
 
     def add_text(**kwargs)
       node = TextNode.new(**kwargs)
+      nodes.push(node)
+      node
+    end
+
+    def add_file(**kwargs)
+      node = FileNode.new(**kwargs)
       nodes.push(node)
       node
     end

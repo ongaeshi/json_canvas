@@ -50,9 +50,23 @@ class JsonCanvasTest < Test::Unit::TestCase
 
     jc.add_text(id: "foo")
     assert_equal jc.to_json, "{\"nodes\":[{\"id\":\"foo\",\"x\":0,\"y\":0,\"width\":250,\"height\":60,\"type\":\"text\",\"text\":\"\"}],\"edges\":[]}"
-    
+
     jc.add_text(id: "bar", x: 10, y: 20, width: 100, height: 200, color: "2", text: "BAR")
     assert_equal jc.to_json, '{"nodes":[{"id":"foo","x":0,"y":0,"width":250,"height":60,"type":"text","text":""},{"id":"bar","x":10,"y":20,"width":100,"height":200,"color":"2","type":"text","text":"BAR"}],"edges":[]}'
+  end
+
+  test "add_file_node" do
+    jc = JsonCanvas.create
+
+    n = jc.add_file(file: "foo/bar")
+    assert_equal n.type, "file"
+    assert_equal n.file, "foo/bar"
+    assert_nil n.subpath, nil
+
+    n = jc.add_file(file: "foo/bar.md", subpath: "#baz")
+    assert_equal n.type, "file"
+    assert_equal n.file, "foo/bar.md"
+    assert_equal n.subpath, "#baz"
   end
 
   def valid_id?(id) = /\A[a-z0-9]{16}\z/.match?(id)
