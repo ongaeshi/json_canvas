@@ -98,9 +98,9 @@ class JsonCanvasTest < Test::Unit::TestCase
   test "add_group" do
     jc = JsonCanvas.create
     start = jc.add_text(id: "START", text: "start")
-    goal = jc.add_text(id: "GOAL", x: 100, text: "goal")
+    goal = jc.add_text(id: "GOAL", x: 400, text: "goal")
     jc.add_edge(id: "edge1", fromNode: start.id, toNode: goal.id)
     jc.add_edge(id: "edge2", fromNode: start.id, fromSide: "top", fromEnd: "arrow", toNode: goal.id, toSide: "bottom", toEnd: "arrow", color: "2", label: "HELLO")
-    assert_equal jc.to_json , '{"nodes":[{"id":"START","x":0,"y":0,"width":250,"height":60,"type":"text","text":"start"},{"id":"GOAL","x":100,"y":0,"width":250,"height":60,"type":"text","text":"goal"}],"edges":[{"id":"edge1","fromNode":"START","toNode":"GOAL"},{"id":"edge2","fromNode":"START","toNode":"GOAL","fromSide":"top","fromEnd":"arrow","toSide":"bottom","toEnd":"arrow","color":"2","label":"HELLO"}]}'
+    assert_equal jc.to_json , '{"nodes":[{"id":"START","x":0,"y":0,"width":250,"height":60,"type":"text","text":"start"},{"id":"GOAL","x":400,"y":0,"width":250,"height":60,"type":"text","text":"goal"}],"edges":[{"id":"edge1","fromNode":"START","toNode":"GOAL","fromSide":"right","toSide":"left"},{"id":"edge2","fromNode":"START","toNode":"GOAL","fromSide":"top","fromEnd":"arrow","toSide":"bottom","toEnd":"arrow","color":"2","label":"HELLO"}]}'
   end
 end

@@ -118,10 +118,10 @@ module JsonCanvas
     def initialize(**kwargs)
       @id = kwargs[:id] || SecureRandom.uuid.gsub('-', '')[0...16]
       @fromNode = kwargs[:fromNode] || raise
-      @fromSide = kwargs[:fromSide]  # "top" | "right" | "bottom" | "left"
+      @fromSide = kwargs[:fromSide] || "right" # "top" | "right" | "bottom" | "left"
       @fromEnd = kwargs[:fromEnd] # "none" | "arrow"
       @toNode = kwargs[:toNode] || raise
-      @toSide = kwargs[:toSide]
+      @toSide = kwargs[:toSide] || "left"
       @toEnd = kwargs[:toEnd]
       @color = kwargs[:color]
       @label = kwargs[:label]
