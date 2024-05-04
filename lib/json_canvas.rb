@@ -94,36 +94,36 @@ module JsonCanvas
   end
 
   class GroupNode < GenericNode
-    attr_accessor :type, :label, :background, :backgroundStyle
+    attr_accessor :type, :label, :background, :background_style
 
     def initialize(**kwargs)
       super(**kwargs)
       @type = "group"
       @label = kwargs[:label]
       @background = kwargs[:background]
-      @backgroundStyle = kwargs[:backgroundStyle]
+      @background_style = kwargs[:backgroundStyle]
     end
 
     def to_hash
       h = to_hash_common(type)
       h["label"] = label if label
       h["background"] = background if background
-      h["backgroundStyle"] = backgroundStyle if backgroundStyle
+      h["backgroundStyle"] = background_style if background_style
       h
     end
   end
 
   class Edge
-    attr_accessor :id, :fromNode, :fromSide, :fromEnd, :toNode, :toSide, :toEnd, :color, :label
+    attr_accessor :id, :from_node, :from_side, :from_end, :to_node, :to_side, :to_end, :color, :label
 
     def initialize(**kwargs)
       @id = kwargs[:id] || SecureRandom.uuid.delete("-")[0...16]
-      @fromNode = kwargs[:fromNode] || raise
-      @fromSide = kwargs[:fromSide] || "right" # "top" | "right" | "bottom" | "left"
-      @fromEnd = kwargs[:fromEnd] # "none" | "arrow"
-      @toNode = kwargs[:toNode] || raise
-      @toSide = kwargs[:toSide] || "left"
-      @toEnd = kwargs[:toEnd]
+      @from_node = kwargs[:fromNode] || raise
+      @from_side = kwargs[:fromSide] || "right" # "top" | "right" | "bottom" | "left"
+      @from_end = kwargs[:fromEnd] # "none" | "arrow"
+      @to_node = kwargs[:toNode] || raise
+      @to_side = kwargs[:toSide] || "left"
+      @to_end = kwargs[:toEnd]
       @color = kwargs[:color]
       @label = kwargs[:label]
     end
@@ -131,13 +131,13 @@ module JsonCanvas
     def to_hash
       h = {
         "id" => id,
-        "fromNode" => fromNode,
-        "toNode" => toNode
+        "fromNode" => from_node,
+        "toNode" => to_node
       }
-      h["fromSide"] = fromSide if fromSide
-      h["fromEnd"] = fromEnd if fromEnd
-      h["toSide"] = toSide if toSide
-      h["toEnd"] = toEnd if toEnd
+      h["fromSide"] = from_side if from_side
+      h["fromEnd"] = from_end if from_end
+      h["toSide"] = to_side if to_side
+      h["toEnd"] = to_end if to_end
       h["color"] = color if color
       h["label"] = label if label
       h

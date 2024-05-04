@@ -86,13 +86,13 @@ class JsonCanvasTest < Test::Unit::TestCase
     assert_equal n.height, 400
     assert_nil n.label
     assert_nil n.background
-    assert_nil n.backgroundStyle
+    assert_nil n.background_style
 
     n = jc.add_group(label: "Test Group", background: "/path/to/image", backgroundStyle: "repeat")
     assert_equal n.type, "group"
     assert_equal n.label, "Test Group"
     assert_equal n.background, "/path/to/image"
-    assert_equal n.backgroundStyle, "repeat"
+    assert_equal n.background_style, "repeat"
   end
 
   test "add_group" do
