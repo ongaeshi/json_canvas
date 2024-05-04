@@ -52,6 +52,8 @@ class JsonCanvasTest < Test::Unit::TestCase
 
     n = jc.add_file(file: "foo/bar")
     assert_equal n.type, "file"
+    assert_equal n.width, 400
+    assert_equal n.height, 400
     assert_equal n.file, "foo/bar"
     assert_nil n.subpath, nil
 
@@ -66,6 +68,8 @@ class JsonCanvasTest < Test::Unit::TestCase
 
     n = jc.add_link()
     assert_equal n.type, "link"
+    assert_equal n.width, 400
+    assert_equal n.height, 400
     assert_equal n.url, "https://www.ruby-lang.org"
 
     n = jc.add_link(url: "https://jsoncanvas.org/spec/1.0/")
@@ -78,6 +82,8 @@ class JsonCanvasTest < Test::Unit::TestCase
 
     n = jc.add_group()
     assert_equal n.type, "group"
+    assert_equal n.width, 400
+    assert_equal n.height, 400
     assert_nil n.label
     assert_nil n.background
     assert_nil n.backgroundStyle

@@ -20,10 +20,13 @@ module JsonCanvas
       @id = kwargs[:id] || SecureRandom.uuid.gsub('-', '')[0...16]
       @x = kwargs[:x] || 0
       @y = kwargs[:y] || 0
-      @width = kwargs[:width] || 250
-      @height = kwargs[:height] || 60 
+      @width = kwargs[:width] || default_width
+      @height = kwargs[:height] || default_height
       @color = kwargs[:color] # Optional
     end
+
+    def default_width = self.is_a?(TextNode) ? 250 : 400
+    def default_height = self.is_a?(TextNode) ? 60 : 400
 
     def to_hash_common(type)
       h = {
