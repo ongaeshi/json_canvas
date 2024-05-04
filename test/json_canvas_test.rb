@@ -72,4 +72,20 @@ class JsonCanvasTest < Test::Unit::TestCase
     assert_equal n.type, "link"
     assert_equal n.url, "https://jsoncanvas.org/spec/1.0/"
   end
+
+  test "add_group_node" do
+    jc = JsonCanvas.create
+
+    n = jc.add_group()
+    assert_equal n.type, "group"
+    assert_nil n.label
+    assert_nil n.background
+    assert_nil n.backgroundStyle
+
+    n = jc.add_group(label: "Test Group", background: "/path/to/image", backgroundStyle: "repeat")
+    assert_equal n.type, "group"
+    assert_equal n.label, "Test Group"
+    assert_equal n.background, "/path/to/image"
+    assert_equal n.backgroundStyle, "repeat"
+  end
 end

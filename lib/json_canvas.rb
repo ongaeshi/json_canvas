@@ -89,6 +89,26 @@ module JsonCanvas
     end
   end
 
+  class GroupNode < GenericNode
+    attr_accessor :type, :label, :background, :backgroundStyle
+
+    def initialize(**kwargs)
+      super(**kwargs)
+      @type = "group"
+      @label = kwargs[:label]
+      @background = kwargs[:background]
+      @backgroundStyle = kwargs[:backgroundStyle]
+    end
+
+    def to_hash
+      h = to_hash_common(type)
+      h["label"] = label if label
+      h["background"] = background if background
+      h["backgroundStyle"] = backgroundStyle if backgroundStyle
+      h
+    end
+  end
+
   class Canvas
     attr_reader :nodes, :edges
 
@@ -114,6 +134,12 @@ module JsonCanvas
 
     def add_link(**kwargs)
       node = LinkNode.new(**kwargs)
+      nodes.push(node)
+      node
+    end
+
+    def add_group(**kwargs)
+      node = GroupNode.new(**kwargs)
       nodes.push(node)
       node
     end
