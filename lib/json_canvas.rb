@@ -5,7 +5,7 @@ require "json"
 require "securerandom"
 
 module JsonCanvas
-  def self.create()
+  def self.create
     Canvas.new
   end
 
@@ -17,7 +17,7 @@ module JsonCanvas
     attr_accessor :id, :x, :y, :width, :height, :color
 
     def initialize(**kwargs)
-      @id = kwargs[:id] || SecureRandom.uuid.gsub('-', '')[0...16]
+      @id = kwargs[:id] || SecureRandom.uuid.delete("-")[0...16]
       @x = kwargs[:x] || 0
       @y = kwargs[:y] || 0
       @width = kwargs[:width] || default_width
@@ -25,8 +25,9 @@ module JsonCanvas
       @color = kwargs[:color] # Optional
     end
 
-    def default_width = self.is_a?(TextNode) ? 250 : 400
-    def default_height = self.is_a?(TextNode) ? 60 : 400
+    def default_width = is_a?(TextNode) ? 250 : 400
+
+    def default_height = is_a?(TextNode) ? 60 : 400
 
     def to_hash_common(type)
       h = {
@@ -34,7 +35,7 @@ module JsonCanvas
         "x" => x,
         "y" => y,
         "width" => width,
-        "height" => height,
+        "height" => height
       }
       h["color"] = color if color
       h["type"] = type
@@ -116,7 +117,7 @@ module JsonCanvas
     attr_accessor :id, :fromNode, :fromSide, :fromEnd, :toNode, :toSide, :toEnd, :color, :label
 
     def initialize(**kwargs)
-      @id = kwargs[:id] || SecureRandom.uuid.gsub('-', '')[0...16]
+      @id = kwargs[:id] || SecureRandom.uuid.delete("-")[0...16]
       @fromNode = kwargs[:fromNode] || raise
       @fromSide = kwargs[:fromSide] || "right" # "top" | "right" | "bottom" | "left"
       @fromEnd = kwargs[:fromEnd] # "none" | "arrow"
@@ -126,12 +127,12 @@ module JsonCanvas
       @color = kwargs[:color]
       @label = kwargs[:label]
     end
-   
+
     def to_hash
       h = {
         "id" => id,
         "fromNode" => fromNode,
-        "toNode" => toNode,
+        "toNode" => toNode
       }
       h["fromSide"] = fromSide if fromSide
       h["fromEnd"] = fromEnd if fromEnd
@@ -154,40 +155,40 @@ module JsonCanvas
       @edges = edges
     end
 
-    def add_text(**kwargs)
-      node = TextNode.new(**kwargs)
+    def add_text(**)
+      node = TextNode.new(**)
       nodes.push(node)
       node
     end
 
-    def add_file(**kwargs)
-      node = FileNode.new(**kwargs)
+    def add_file(**)
+      node = FileNode.new(**)
       nodes.push(node)
       node
     end
 
-    def add_link(**kwargs)
-      node = LinkNode.new(**kwargs)
+    def add_link(**)
+      node = LinkNode.new(**)
       nodes.push(node)
       node
     end
 
-    def add_group(**kwargs)
-      node = GroupNode.new(**kwargs)
+    def add_group(**)
+      node = GroupNode.new(**)
       nodes.push(node)
       node
     end
 
-    def add_edge(**kwargs)
-      edge = Edge.new(**kwargs)
+    def add_edge(**)
+      edge = Edge.new(**)
       edges.push(edge)
       edge
     end
 
     def to_json
       JSON.generate({
-        nodes: nodes.map {|x| x.to_hash},
-        edges: edges.map {|x| x.to_hash},
+        nodes: nodes.map { |x| x.to_hash },
+        edges: edges.map { |x| x.to_hash }
       })
     end
 

@@ -31,9 +31,9 @@ class JsonCanvasTest < Test::Unit::TestCase
   test "text_node_to_hash" do
     jc = JsonCanvas.create
     t = jc.add_text(id: "foo", x: 10, y: 20, text: "hi")
-    assert_equal t.to_hash, {"id"=>"foo", "x"=>10, "y"=>20, "width"=>250, "height"=>60, "type"=>"text", "text"=>"hi"}
+    assert_equal t.to_hash, {"id" => "foo", "x" => 10, "y" => 20, "width" => 250, "height" => 60, "type" => "text", "text" => "hi"}
     t = jc.add_text(id: "bar", color: "1")
-    assert_equal t.to_hash, {"id"=>"bar", "x"=>0, "y"=>0, "width"=>250, "height"=>60, "color"=>"1", "type"=>"text", "text"=>""}
+    assert_equal t.to_hash, {"id" => "bar", "x" => 0, "y" => 0, "width" => 250, "height" => 60, "color" => "1", "type" => "text", "text" => ""}
   end
 
   test "to_json" do
@@ -66,7 +66,7 @@ class JsonCanvasTest < Test::Unit::TestCase
   test "add_link_node" do
     jc = JsonCanvas.create
 
-    n = jc.add_link()
+    n = jc.add_link
     assert_equal n.type, "link"
     assert_equal n.width, 400
     assert_equal n.height, 400
@@ -80,7 +80,7 @@ class JsonCanvasTest < Test::Unit::TestCase
   test "add_group_node" do
     jc = JsonCanvas.create
 
-    n = jc.add_group()
+    n = jc.add_group
     assert_equal n.type, "group"
     assert_equal n.width, 400
     assert_equal n.height, 400
@@ -101,6 +101,6 @@ class JsonCanvasTest < Test::Unit::TestCase
     goal = jc.add_text(id: "GOAL", x: 400, text: "goal")
     jc.add_edge(id: "edge1", fromNode: start.id, toNode: goal.id)
     jc.add_edge(id: "edge2", fromNode: start.id, fromSide: "top", fromEnd: "arrow", toNode: goal.id, toSide: "bottom", toEnd: "arrow", color: "2", label: "HELLO")
-    assert_equal jc.to_json , '{"nodes":[{"id":"START","x":0,"y":0,"width":250,"height":60,"type":"text","text":"start"},{"id":"GOAL","x":400,"y":0,"width":250,"height":60,"type":"text","text":"goal"}],"edges":[{"id":"edge1","fromNode":"START","toNode":"GOAL","fromSide":"right","toSide":"left"},{"id":"edge2","fromNode":"START","toNode":"GOAL","fromSide":"top","fromEnd":"arrow","toSide":"bottom","toEnd":"arrow","color":"2","label":"HELLO"}]}'
+    assert_equal jc.to_json, '{"nodes":[{"id":"START","x":0,"y":0,"width":250,"height":60,"type":"text","text":"start"},{"id":"GOAL","x":400,"y":0,"width":250,"height":60,"type":"text","text":"goal"}],"edges":[{"id":"edge1","fromNode":"START","toNode":"GOAL","fromSide":"right","toSide":"left"},{"id":"edge2","fromNode":"START","toNode":"GOAL","fromSide":"top","fromEnd":"arrow","toSide":"bottom","toEnd":"arrow","color":"2","label":"HELLO"}]}'
   end
 end
