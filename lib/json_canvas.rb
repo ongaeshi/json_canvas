@@ -112,6 +112,37 @@ module JsonCanvas
     end
   end
 
+  class Edge
+    attr_accessor :id, :fromNode, :fromSide, :fromEnd, :toNode, :toSide, :toEnd, :color, :label
+
+    def initialize(**kwargs)
+      @id = kwargs[:id] || SecureRandom.uuid.gsub('-', '')[0...16]
+      @fromNode = kwargs[:fromNode] || raise
+      @fromSide = kwargs[:fromSide]  # "top" | "right" | "bottom" | "left"
+      @fromEnd = kwargs[:fromEnd] # "none" | "arrow"
+      @toNode = kwargs[:toNode] || raise
+      @toSide = kwargs[:toSide]
+      @toEnd = kwargs[:toEnd]
+      @color = kwargs[:color]
+      @label = kwargs[:label]
+    end
+   
+    def to_hash
+      h = {
+        "id" => id,
+        "fromNode" => fromNode,
+        "toNode" => toNode,
+      }
+      h["fromSide"] = fromSide if fromSide
+      h["fromEnd"] = fromEnd if fromEnd
+      h["toSide"] = toSide if toSide
+      h["toEnd"] = toEnd if toEnd
+      h["color"] = color if color
+      h["label"] = label if label
+      h
+    end
+  end
+
   class Canvas
     attr_reader :nodes, :edges
 
@@ -147,13 +178,16 @@ module JsonCanvas
       node
     end
 
-    # def add_edge(edge)
-    # end
+    def add_edge(**kwargs)
+      edge = Edge.new(**kwargs)
+      edges.push(edge)
+      edge
+    end
 
     def to_json
       JSON.generate({
         nodes: nodes.map {|x| x.to_hash},
-        edges: []
+        edges: edges.map {|x| x.to_hash},
       })
     end
 
