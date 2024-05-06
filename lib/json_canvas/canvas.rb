@@ -14,6 +14,12 @@ module JsonCanvas
         case x["type"]
         when "text"
           TextNode.new(**x.transform_keys(&:to_sym))
+        when "file"
+          FileNode.new(**x.transform_keys(&:to_sym))
+        when "link"
+          LinkNode.new(**x.transform_keys(&:to_sym))
+        when "group"
+          GroupNode.new(**x.transform_keys(&:to_sym))
         else
           raise
         end
