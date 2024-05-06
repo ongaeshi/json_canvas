@@ -51,7 +51,8 @@ module JsonCanvas
       })
     end
 
-    # def save
-    # end
+    def save(filename)
+      File.write(filename, to_json)
+    end
   end
 end
