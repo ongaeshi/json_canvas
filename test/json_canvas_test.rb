@@ -118,4 +118,19 @@ class JsonCanvasTest < Test::Unit::TestCase
       assert_equal File.read(path), jc.to_json
     end
   end
+
+  test "load" do
+    jc = JsonCanvas.create
+    start = jc.add_text(id: "START", text: "start")
+    goal = jc.add_text(id: "GOAL", x: 400, text: "goal")
+    jc.add_edge(id: "edge1", fromNode: start.id, toNode: goal.id)
+    jc.add_edge(id: "edge2", fromNode: start.id, fromSide: "top", fromEnd: "arrow", toNode: goal.id, toSide: "bottom", toEnd: "arrow", color: "2", label: "HELLO")
+    
+    Dir.mktmpdir do |dir|
+      path = File.join(dir, "test.canvas")
+      jc.save(path)
+      jc2 = JsonCanvas.load(File.read(path))
+      assert_equal jc.to_json, jc2.to_json
+    end
+  end
 end

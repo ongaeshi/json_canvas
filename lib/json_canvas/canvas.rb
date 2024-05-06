@@ -1,12 +1,25 @@
 # frozen_string_literal: true
 
 require "json"
+require "json_canvas/node"
+require "json_canvas/edge"
 
 module JsonCanvas
   class Canvas
     attr_reader :nodes, :edges
 
     def self.load(json)
+      obj = JSON.load(json)
+      nodes = obj["nodes"].map do |x| 
+        case x["type"]
+        when "text"
+          TextNode.new(**x.transform_keys(&:to_sym))
+        else
+          raise
+        end
+      end
+      edges = obj["edges"].map { |x| Edge.new(**x.transform_keys(&:to_sym)) }
+      Canvas.new(nodes, edges)
     end
 
     def initialize(nodes = [], edges = [])
