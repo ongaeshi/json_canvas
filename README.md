@@ -79,12 +79,23 @@ jc.add_edge(id: "edge2", fromNode: start.id, fromSide: "top", fromEnd: "arrow", 
 
 ![image](https://github.com/ongaeshi/json_canvas/assets/154418/820d4709-c9fd-41a6-9548-fe6b52177273)
 
+### Get JSON string
+
+To convert your canvas instance into a JSON string, you can use the `to_json` method. 
+
+```ruby
+jc.to_json  #=> '{"nodes":[{"id":"START","x":0,"y":0,"width":250,"height":60,"type":"text","text":"start"},{"id":"GOAL","x":400,"y":0,"width":250,"height":60,"type":"text","text":"goal"}],"edges":[{"id":"edge1","fromNode":"START","toNode":"GOAL","fromSide":"right","toSide":"left"},{"id":"edge2","fromNode":"START","toNode":"GOAL","fromSide":"top","fromEnd":"arrow","toSide":"bottom","toEnd":"arrow","color":"2","label":"HELLO"}]}'
+```
+
 ### Saving and Loading
 Save the canvas to a file or load from it:
 
 ```ruby
-jc.save('my_canvas.json')
-loaded_canvas = JsonCanvas.parse(File.read('my_canvas.json'))
+# Save to "sample.canvas" file.
+jc.save("sample.canvas")
+
+# Load to canvas object.
+loaded_canvas = JsonCanvas.parse(File.read("sample.canvas"))
 ```
 
 ## Development
