@@ -8,7 +8,7 @@ module JsonCanvas
   class Canvas
     attr_reader :nodes, :edges
 
-    def self.load(json)
+    def self.parse(json)
       obj = JSON.parse(json)
       nodes = obj["nodes"].map do |x|
         case x["type"]

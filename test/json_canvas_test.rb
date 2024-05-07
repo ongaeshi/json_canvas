@@ -119,7 +119,7 @@ class JsonCanvasTest < Test::Unit::TestCase
     end
   end
 
-  test "load" do
+  test "parse" do
     jc = JsonCanvas.create
     start = jc.add_text(id: "START", text: "start")
     goal = jc.add_text(id: "GOAL", x: 400, text: "goal")
@@ -129,7 +129,7 @@ class JsonCanvasTest < Test::Unit::TestCase
     Dir.mktmpdir do |dir|
       path = File.join(dir, "test.canvas")
       jc.save(path)
-      jc2 = JsonCanvas.load(File.read(path))
+      jc2 = JsonCanvas.parse(File.read(path))
       assert_equal jc.to_json, jc2.to_json
     end
   end

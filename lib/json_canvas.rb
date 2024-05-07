@@ -10,7 +10,7 @@ module JsonCanvas
     Canvas.new
   end
 
-  def self.load(json)
-    Canvas.load(json)
+  def self.parse(json)
+    Canvas.parse(json)
   end
 end
