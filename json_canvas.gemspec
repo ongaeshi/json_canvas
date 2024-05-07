@@ -12,9 +12,9 @@ Gem::Specification.new do |spec|
   spec.description = "JsonCanvas is a Ruby gem that provides a robust implementation of the JSONCanvas specification. This gem enables developers to easily create and manipulate JSONCanvas format. It supports functionalities such as adding text, files, links, and grouping nodes with customizable attributes like position, size, and identifiers. Additional features include connecting nodes with edges that have customizable attributes, and the ability to save and load canvas states from JSON files. This gem facilitates the easy integration of the JSONCanvas format into Ruby applications, enhancing development efficiency and user experience."
   spec.homepage = "https://github.com/ongaeshi/json_canvas"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
+  spec.required_ruby_version = ">= 3.0.0"
 
-  spec.metadata["allowed_push_host"] = ""
+  # spec.metadata["allowed_push_host"] = ""
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/ongaeshi/json_canvas"
