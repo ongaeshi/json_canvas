@@ -47,11 +47,13 @@ Add text nodes to the canvas:
 text_node = jc.add_text(text: "Hi")
 ```
 
-You can customize the text node with parameters like id, position, size, and content:
+You can customize the text node with parameters like id, position, size, content and color:
 
 ```ruby
-custom_text = jc.add_text(id: "unique_id", x: 10, y: 20, width: 100, height: 200, text: "Hello World")
+custom_text = jc.add_text(id: "unique_id", x: 50, y: 100, width: 200, height: 50, text: "Hello World!", color: "2")
 ```
+
+![image](https://github.com/ongaeshi/json_canvas/assets/154418/4138e411-3d21-4637-bd1b-3cdebe69a398)
 
 ### Advanced Node Types
 
@@ -74,6 +76,8 @@ goal = jc.add_text(id: "GOAL", x: 400, text: "goal")
 jc.add_edge(id: "edge1", fromNode: start.id, toNode: goal.id)
 jc.add_edge(id: "edge2", fromNode: start.id, fromSide: "top", fromEnd: "arrow", toNode: goal.id, toSide: "bottom", toEnd: "arrow", color: "2", label: "HELLO")
 ```
+
+![image](https://github.com/ongaeshi/json_canvas/assets/154418/820d4709-c9fd-41a6-9548-fe6b52177273)
 
 ### Saving and Loading
 Save the canvas to a file or load from it:
