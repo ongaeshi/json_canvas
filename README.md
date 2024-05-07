@@ -91,7 +91,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/json_canvas.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ongaeshi/json_canvas.
 
 ## License
 
