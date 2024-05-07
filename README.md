@@ -1,24 +1,87 @@
 # JsonCanvas
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/json_canvas`. To experiment with that code, run `bin/console` for an interactive prompt.
+[JSONCanvas](https://jsoncanvas.org/spec/1.0/) Implementation for Ruby.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+To install JsonCanvas gem, add this line to your application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
+```bash
+gem 'json_canvas'
+```
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+And then execute:
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+```bash
+$ bundle install
+```
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Or install it yourself as:
+
+```bash
+$ gem install json_canvas
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+
+To use JSONCanvas, include the gem in your Ruby script:
+
+```ruby
+require 'json_canvas'
+```
+
+### Creating a Canvas
+
+Create a new canvas using:
+
+```ruby
+jc = JsonCanvas.create
+```
+
+### Adding Text Nodes
+
+Add text nodes to the canvas:
+
+```ruby
+text_node = jc.add_text(text: "Hi")
+```
+
+You can customize the text node with parameters like id, position, size, and content:
+
+```ruby
+custom_text = jc.add_text(id: "unique_id", x: 10, y: 20, width: 100, height: 200, text: "Hello World")
+```
+
+### Advanced Node Types
+
+Add file and link nodes with specific attributes:
+
+```ruby
+file_node = jc.add_file(file: "path/to/file")
+link_node = jc.add_link(url: "https://example.com")
+group_node = jc.add_group(label: "Test Group")
+```
+
+### Edge
+
+Connect nodes with edges:
+
+```ruby
+jc = JsonCanvas.create
+start = jc.add_text(id: "START", text: "start")
+goal = jc.add_text(id: "GOAL", x: 400, text: "goal")
+jc.add_edge(id: "edge1", fromNode: start.id, toNode: goal.id)
+jc.add_edge(id: "edge2", fromNode: start.id, fromSide: "top", fromEnd: "arrow", toNode: goal.id, toSide: "bottom", toEnd: "arrow", color: "2", label: "HELLO")
+```
+
+### Saving and Loading
+Save the canvas to a file or load from it:
+
+```ruby
+jc.save('my_canvas.json')
+loaded_canvas = JsonCanvas.parse(File.read('my_canvas.json'))
+```
 
 ## Development
 
