@@ -125,7 +125,7 @@ class JsonCanvasTest < Test::Unit::TestCase
     goal = jc.add_text(id: "GOAL", x: 400, text: "goal")
     jc.add_edge(id: "edge1", fromNode: start.id, toNode: goal.id)
     jc.add_edge(id: "edge2", fromNode: start.id, fromSide: "top", fromEnd: "arrow", toNode: goal.id, toSide: "bottom", toEnd: "arrow", color: "2", label: "HELLO")
-    
+
     Dir.mktmpdir do |dir|
       path = File.join(dir, "test.canvas")
       jc.save(path)

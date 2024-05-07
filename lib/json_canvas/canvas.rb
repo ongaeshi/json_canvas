@@ -9,8 +9,8 @@ module JsonCanvas
     attr_reader :nodes, :edges
 
     def self.load(json)
-      obj = JSON.load(json)
-      nodes = obj["nodes"].map do |x| 
+      obj = JSON.parse(json)
+      nodes = obj["nodes"].map do |x|
         case x["type"]
         when "text"
           TextNode.new(**x.transform_keys(&:to_sym))
