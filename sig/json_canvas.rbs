@@ -1,4 +1,81 @@
+# TypeProf 0.21.11
+
+# Classes
 module JsonCanvas
   VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
+  def self.create: -> untyped
+  def self.parse: (untyped json) -> untyped
+
+  class Canvas
+    attr_reader nodes: Array[untyped]
+    attr_reader edges: Array[untyped]
+    def self.parse: (untyped json) -> Canvas
+    def initialize: (?Array[untyped] nodes, ?Array[untyped] edges) -> void
+    def add_text: (**untyped) -> untyped
+    def add_file: (**untyped) -> untyped
+    def add_link: (**untyped) -> untyped
+    def add_group: (**untyped) -> untyped
+    def add_edge: (**untyped) -> untyped
+    def to_json: -> untyped
+    def save: (untyped filename) -> Integer
+  end
+
+  class Edge
+    attr_accessor id: String?
+    attr_accessor from_node: untyped
+    attr_accessor from_side: String
+    attr_accessor from_end: untyped
+    attr_accessor to_node: untyped
+    attr_accessor to_side: String
+    attr_accessor to_end: untyped
+    attr_accessor color: untyped
+    attr_accessor label: untyped
+    def initialize: (**untyped) -> void
+    def to_hash: -> Hash[String, String?]
+  end
+
+  class GenericNode
+    attr_accessor id: String?
+    attr_accessor x: Integer
+    attr_accessor y: Integer
+    attr_accessor width: Integer
+    attr_accessor height: Integer
+    attr_accessor color: untyped
+    def initialize: (**untyped) -> void
+    def default_width: -> Integer
+    def default_height: -> Integer
+    def to_hash_common: (String `type`) -> (Hash[String, (Integer | String)?])
+  end
+
+  class TextNode < GenericNode
+    attr_accessor type: String
+    attr_accessor text: String
+    def initialize: (**untyped) -> void
+    def to_hash: -> (Hash[String, (Integer | String)?])
+  end
+
+  class FileNode < GenericNode
+    attr_accessor type: String
+    attr_accessor file: String
+    attr_accessor subpath: untyped
+    def initialize: (**untyped) -> void
+    def to_hash: -> (Hash[String, (Integer | String)?])
+  end
+
+  class LinkNode < GenericNode
+    attr_accessor type: String
+    attr_accessor url: String
+    def initialize: (**untyped) -> void
+    def to_hash: -> (Hash[String, (Integer | String)?])
+  end
+
+  class GroupNode < GenericNode
+    attr_accessor type: String
+    attr_accessor label: untyped
+    attr_accessor background: untyped
+    attr_accessor background_style: untyped
+    def initialize: (**untyped) -> void
+    def to_hash: -> (Hash[String, (Integer | String)?])
+  end
 end
